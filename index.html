@@ -142,18 +142,21 @@
         </table>
       </details>
 
-    </div>
+        </div>
+<footer>
+  Laporan ini diperbarui oleh wali kelas dan digunakan untuk pemantauan perkembangan siswa.
+</footer>
+</div>
 
-    <footer>
-      Laporan ini diperbarui oleh wali kelas dan digunakan untuk pemantauan perkembangan siswa.
-    </footer>
-  </div>
 <script>
-fetch("https://script.google.com/macros/s/AKfycbx1MG3e3JAtvyYy2C0KplO4DEuZBA_T1hjxrw-o4xHt6oMCLD6L-Fx3O1VWx73bE-lI/exec")
-  .then(res => res.json())
-  .then(data => {
-    console.log(data);
-  });
+function loadData(data) {
+  const siswa = data.siswa[1]; // baris pertama setelah header
+  document.getElementById("nama-siswa").innerText = siswa[1];
+}
 </script>
+
+<script src="https://script.google.com/macros/s/AKfycbzt1AiUMn8bgKeV0V51xIpI4JKnR4fIkUfQd9f8Uo7379hKa1-PSYTLi4WOqFLZ9W6U/exec?callback=loadData"></script>
+
 </body>
 </html>
+
