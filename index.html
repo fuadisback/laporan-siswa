@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Laporan Perkembangan Siswa</title>
+
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -26,9 +27,6 @@
       margin-bottom: 16px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
-    .identity p {
-      margin: 4px 0;
-    }
     .section-title {
       font-weight: bold;
       margin-bottom: 8px;
@@ -47,11 +45,6 @@
     table th {
       background: #ecf0f1;
     }
-    details summary {
-      cursor: pointer;
-      font-weight: bold;
-      margin: 8px 0;
-    }
     footer {
       text-align: center;
       font-size: 12px;
@@ -60,111 +53,56 @@
     }
   </style>
 </head>
+
 <body>
-  <div class="container">
-    <h1>Laporan Perkembangan Siswa</h1>
+<div class="container">
+  <h1>Laporan Perkembangan Siswa</h1>
 
-    <!-- Identitas Siswa -->
-    <div class="card identity">
-      <div class="section-title">Identitas Siswa</div>
-      <p><strong>Nama:</strong> Udin</p>
-      <p><strong>Kelas:</strong> IV A</p>
-      <p><strong>NIS:</strong> 001</p>
-    </div>
+  <!-- IDENTITAS -->
+  <div class="card">
+    <div class="section-title">Identitas Siswa</div>
+    <p><strong>Nama:</strong> <span id="nama-siswa">-</span></p>
+    <p><strong>NIS:</strong> <span id="nis-siswa">-</span></p>
+  </div>
 
-    <!-- Sikap -->
-    <div class="card">
-      <div class="section-title">Perkembangan Sikap</div>
-      <p>Mulai menunjukkan tanggung jawab dalam mengerjakan tugas, namun masih perlu bimbingan dalam disiplin waktu.</p>
-    </div>
+  <!-- NILAI MATEMATIKA -->
+  <div class="card">
+    <div class="section-title">Nilai Matematika</div>
+    <table>
+      <tr>
+        <th>TP 1</th>
+        <th>TP 2</th>
+        <th>TP 3</th>
+        <th>TP 4</th>
+      </tr>
+      <tr>
+        <td id="tp1">-</td>
+        <td id="tp2">-</td>
+        <td id="tp3">-</td>
+        <td id="tp4">-</td>
+      </tr>
+    </table>
+  </div>
 
-    <!-- Kehadiran -->
-    <div class="card">
-      <div class="section-title">Kehadiran</div>
-      <table>
-        <tr>
-          <th>Hadir</th>
-          <th>Sakit</th>
-          <th>Izin</th>
-          <th>Tanpa Keterangan</th>
-        </tr>
-        <tr>
-          <td>18</td>
-          <td>2</td>
-          <td>1</td>
-          <td>0</td>
-        </tr>
-      </table>
-    </div>
-
-    <!-- Catatan & Saran -->
-    <div class="card">
-      <div class="section-title">Catatan Khusus & Saran</div>
-      <p><strong>Catatan:</strong> Konsentrasi belajar meningkat.</p>
-      <p><strong>Saran:</strong> Mohon dampingi anak membaca 10 menit setiap hari.</p>
-    </div>
-
-    <!-- Nilai -->
-    <div class="card">
-      <div class="section-title">Nilai Akademik</div>
-
-      <details open>
-        <summary>Matematika</summary>
-        <table>
-          <tr>
-            <th>TP 1</th>
-            <th>TP 2</th>
-            <th>TP 3</th>
-            <th>TP 4</th>
-          </tr>
-          <tr>
-            <td id="tp1">-</td>
-            <td id="tp2">-</td>
-            <td id="tp3">-</td>
-            <td id="tp4">-</td>
-
-          </tr>
-        </table>
-      </details>
-
-      <details>
-        <summary>Bahasa Indonesia</summary>
-        <table>
-          <tr>
-            <th>TP 1</th>
-            <th>TP 2</th>
-            <th>TP 3</th>
-          </tr>
-          <tr>
-            <td>80</td>
-            <td>85</td>
-            <td>90</td>
-          </tr>
-        </table>
-      </details>
-
-        </div>
-<footer>
-  Laporan ini diperbarui oleh wali kelas dan digunakan untuk pemantauan perkembangan siswa.
-</footer>
-    <h2>Data Siswa</h2>
-<p><strong>Nama:</strong> <span id="nama-siswa">-</span></p>
-
+  <footer>
+    Laporan ini diperbarui oleh wali kelas dan digunakan untuk pemantauan perkembangan siswa.
+  </footer>
 </div>
 
 <script>
 fetch("https://script.google.com/macros/s/AKfycbyoytCOvTkZECm23hF3cwgjbw-VC9tXiD-3UviQjq35g2RrXzuK-IbJFWQdmAOZihmW/exec")
   .then(res => res.json())
   .then(data => {
+    document.getElementById("nama-siswa").innerText = data.nama;
+    document.getElementById("nis-siswa").innerText = data.nis;
+
     document.getElementById("tp1").innerText = data.tp1 || "-";
     document.getElementById("tp2").innerText = data.tp2 || "-";
     document.getElementById("tp3").innerText = data.tp3 || "-";
     document.getElementById("tp4").innerText = data.tp4 || "-";
-  });
+  })
+  .catch(err => console.error("Gagal ambil data:", err));
 </script>
 
 </body>
 </html>
-
-
-
