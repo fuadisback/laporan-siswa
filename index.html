@@ -90,19 +90,22 @@
 </div>
 
 <script>
-fetch("https://script.google.com/macros/s/AKfycbyoytCOvTkZECm23hF3cwgjbw-VC9tXiD-3UviQjq35g2RrXzuK-IbJFWQdmAOZihmW/exec")
-  .then(res => res.json())
-  .then(data => {
-    document.getElementById("nama-siswa").innerText = data.nama;
-    document.getElementById("nis-siswa").innerText = data.nis;
+const url = "https://script.google.com/macros/s/AKfycbyoytCOvTkZECm23hF3cwgjbw-VC9tXiD-3UviQjq35g2RrXzuK-IbJFWQdmAOZihmW/exec";
 
-    document.getElementById("tp1").innerText = data.tp1 || "-";
-    document.getElementById("tp2").innerText = data.tp2 || "-";
-    document.getElementById("tp3").innerText = data.tp3 || "-";
-    document.getElementById("tp4").innerText = data.tp4 || "-";
+fetch(url)
+  .then(r => r.json())
+  .then(d => {
+    console.log("DATA DARI SHEET:", d); // <- cek ini
+
+    document.getElementById("nama-siswa").textContent = d.nama;
+    document.getElementById("tp1").textContent = d.tp1 || "-";
+    document.getElementById("tp2").textContent = d.tp2 || "-";
+    document.getElementById("tp3").textContent = d.tp3 || "-";
+    document.getElementById("tp4").textContent = d.tp4 || "-";
   })
-  .catch(err => console.error("Gagal ambil data:", err));
+  .catch(e => console.error("ERROR:", e));
 </script>
 
 </body>
 </html>
+
